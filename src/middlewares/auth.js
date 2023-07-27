@@ -52,7 +52,7 @@ const isAdmin = async( req,res,next) =>{
         req.user = userLogged;
 
         if (userLogged.role !== "admin") {
-            return res.status(401).json({message:"No eres administrador campeon"})
+            return res.status(401).json({message:"No eres administrador"})
         }
         next()
 

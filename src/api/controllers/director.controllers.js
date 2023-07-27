@@ -12,6 +12,7 @@ const getDirectors = async (req, res) => {
 const postDirector = async (req, res) => {
   try {
     const newDirector = new Director(req.body);
+    newDirector.img = req.file.path;
     const createdDirector = await newDirector.save();
 
     return res.status(201).json(createdDirector);
@@ -25,6 +26,7 @@ const putDirector = async (req, res) => {
     const { id } = req.params;
     const putDirector = new Director(req.body);
     putDirector._id = id;
+    putDirector.img = req.file.path;
     const updatedDirector = await Director.findByIdAndUpdate(id, putDirector, {
       new: true,
     });

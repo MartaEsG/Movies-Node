@@ -12,6 +12,7 @@ const getActors = async (req, res) => {
 const postActor = async (req, res) => {
   try {
     const newActor = new Actor(req.body);
+    newActor.img = req.file.path;
     const createdActor = await newActor.save();
 
     return res.status(201).json(createdActor);
@@ -25,6 +26,7 @@ const putActor = async (req, res) => {
     const { id } = req.params;
     const putActor = new Actor(req.body);
     putActor._id = id;
+    putActor.img = req.file.path;
     const updatedActor = await Actor.findByIdAndUpdate(id, putActor, {
       new: true,
     });
