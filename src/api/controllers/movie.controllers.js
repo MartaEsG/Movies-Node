@@ -12,7 +12,9 @@ const getMovies = async (req, res) => {
 const postMovie = async (req, res) => {
   try {
     const newMovie = new Movie(req.body);
-    newMovie.img = req.file.path;
+    if (req.file) {
+      newMovie.img = req.file.path;
+    }
     const createdMovie = await newMovie.save();
 
     return res.status(201).json(createdMovie);
